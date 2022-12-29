@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "webclass-parser"
+version = "0.1.0"
+
+packages = [
+	"webclass_parser",
+	"webclass_parser/py.typed"
+]
+
+dependencies = [
+	"requests == 2.28.*",
+	"beautifulsoup4 == 4.11.*"
+]
+
+[project.optional-dependencies]
+types = [
+	"types-requests == 2.28.*",
+	"types-beautifulsoup4 == 4.11.*"
+]
