@@ -6,28 +6,13 @@
 ## Usage
 
 ```python
-import webclass_parser as wp
+from webclass-parser.request import auth_user, check_token, fetch_clazz_table
 
-token = wp.auth(username="XXX", password="XXX")
+token = wp.auth_user(username="XXX", password="XXX")
 
-if token is None:
-  raise Exception("failed to fetch valid token")
+if token is None or not check_token(token):
+  raise Exception("failed to auth user")
 
-if not wp.check(token):
-  raise Exception("invalid token")
-
-clazz_table = wp.parse_clazz_table(token)
-
-if clazz_table is None:
-  raise Exception("failed to fetch valid class table")
-
-for col in range(clazz_table.col_count):
-  for row in range(clazz_table.row_count):
-    clazz = clazz_table.get(col=col, row=row)
-
-    if clazz:
-      print(clazz.displayName, end=", ")
-    else:
-      print("empty", end=", ")
-  print()
+clazz_table = fetch_clazz_table(token)
+print(clazz_table)
 ```
